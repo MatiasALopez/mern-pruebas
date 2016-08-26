@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
+    script(src='https://npmcdn.com/react@15.3.1/dist/react.js')
+    script(src='https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js')
+    script(src='https://npmcdn.com/babel-core@5.8.38/browser.min.js')
+    script(src='https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/underscore-min.js')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    #main(class='container')
+      block content
+    block scripts
