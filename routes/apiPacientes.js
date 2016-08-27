@@ -15,34 +15,38 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     db.openDbAndExecuteIfNotError(function(db) {
         db.collection('pacientes').find({_id: parseInt(req.params.id)}).limit(1).toArray(function(err, docs) {
-            res.json(docs[0]);
+            res.json(docs[0] || {});
             db.close();
         });
     });
 });
 
-router.post('/:id', function(req, res, next) {
+router.post('/', function(req, res, next) {
     db.openDbAndExecuteIfNotError(function(db) {
-        if (req.body._id != 0) {
-            db.collection('pacientes').updateOne(
-                {_id: parseInt(req.params.id)}, 
-                {$set: req.body});
-
-            res.status(200).end();
-            db.close();
-        } else {
-            db.collection('pacientes').count(function(err, r) {
-                req.body._id = r + 1;
-                db.collection('pacientes').insert(
-                    req.body,
-                    function(err, r) {
-                        res.status(200).end();
-                        db.close();
-                    });
-            })
-        }
+        db.collection('pacientes').insert(
+            req.body,
+            function(err, r) {
+                if (err) {
+                    res.status(500).json(err);
+                } else {
+                    res.status(200).end();
+                }
+                db.close();
+            });
     });
 });
+
+router.put('/:id', function(req, res, next) {
+    db.openDbAndExecuteIfNotError(function(db) {
+        db.collection('pacientes').updateOne(
+            {_id: parseInt(req.params.id)}, 
+            {$set: req.body});
+
+        res.status(200).end();
+        db.close();
+    });
+});
+
 
 function obtenerPaciente(id) {
     return _.find(db.pacientes, function (p) { 

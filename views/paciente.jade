@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Paciente
-  #formPaciente(data-paciente-id="#{pacienteId}")
+  #formPaciente(data-paciente-id=pacienteId || false, data-save-button=pacienteId ? "false": "true")
 
 block scripts
   script(type='text/babel', src='/js/components/FormPaciente.js')
