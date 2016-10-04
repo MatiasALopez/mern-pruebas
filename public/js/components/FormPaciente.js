@@ -132,4 +132,7 @@ var FormPaciente = React.createClass({
 var $formPacienteElement = $('#formPaciente');
 var pacienteId = parseInt($formPacienteElement.data("paciente-id") || 0),
     saveButton = $formPacienteElement.data("save-button");
-ReactDOM.render(<FormPaciente urlBase="/api/pacientes/" pacienteId={pacienteId} saveButton={saveButton} />, $formPacienteElement[0]);
+ReactDOM.render(
+	<FormPaciente urlBase="/api/pacientes/" pacienteId={pacienteId} saveButton={saveButton} />,
+	$formPacienteElement[0]
+);
